@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Shopify Image Repo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.12/css/all.css'>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/upload-img-style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+{% if alert %}
+
+<script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+</script>
+
+<div class="alert alert-success" role="alert" style="margin: 50px 50px;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Error!</strong> {{alert}}
+</div>
+
+{% endif %}
+
+<nav>
+  <div class="container">
+    <div class="grid">
+      <div class="column-xs-12 column-md-8">
+        <p id="highlight">Shopify Image Repo</p>
+      </div>
+      <div class="column-xs-12">
+        <ul>
+          <li><a href="/dashboard/">Home</a></li>
+          <li><a href="/signout">Signout</a></li>
+          <li><a href="#"></a></li>
+          <li><a href="/profile">Hello {{username}}!</a></li>
+          <li><a href="#">${{userbalance}}</a></li>
+          <li><a href="/dashboard/addproducts" class="active">Add</a></li>
+          <li><a href="/dashboard/removeproducts">Remove</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<section class="gallery">
+  
+<div class="uploadWrapper">
+  <div class="container">  
+      <form id="product" method=POST action="{{ url_for('addProductsNew') }}" enctype="multipart/form-data">
+        <h3>Product Upload</h3>
+        <fieldset>
+          <input placeholder="Product Name" name="productname" type="text" tabindex="1" required>
+        </fieldset>
+        <fieldset>
+          <input placeholder="Quantity" name="productquantity" type="tel" tabindex="2" required>
+        </fieldset>
+        <fieldset>
+          <input placeholder="Price in dollars..." name="productprice" type="tel" tabindex="3" required>
+        </fieldset>
+      
+  
+        <div id="imageUploadForm" class="imageUploadForm">
+          <span class="helpText" id="helpText">Upload an image</span>
+          <input id="file" type="file" name="file" class="uploadButton" accept="image/*"/>
+          <div id="uploadedImg" class="uploadedImg">
+            <span class="unveil"></span>
+          </div>
+          <span class="pickFile">
+            <a href="#" class="pickFileButton">Pick file</a>
+          </span>
+        </div>
+        
+  
+      <form>
+        <fieldset>
+          <button name="submit" type="submit" id="product-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+      </form>
+  
+    </form>
+      
+    </div>
+  </div>
+</section>
+
+  <script  src="../static/js/home.js"></script>
+  <script src='../static/js/jquery.js'></script><script  src="../static/js/upload-img-script.js"></script>
+
+</body>
+</html>

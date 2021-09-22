@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.12/css/all.css'>
+    <link rel="stylesheet" href="../static/css/home.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+{% if alert %}
+
+<script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+</script>
+
+<div class="alert alert-success" role="alert" style="margin: 50px 50px;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Error!</strong> {{alert}}
+</div>
+
+{% endif %}
+
+<nav>
+  <div class="container">
+    <div class="grid">
+      <div class="column-xs-12 column-md-8">
+        <p id="highlight">User Profile</p>
+      </div>
+      <div class="column-xs-12">
+        <ul>
+          <li><a href="/dashboard/">Home</a></li>
+          <li><a href="/signout">Signout</a></li>
+          <li><a href="#"></a></li>
+          <li><a href="/profile" class="active" >Hello {{username}}!</a></li>
+          <li><a href="#">${{userbalance}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<section class="gallery">
+  <div class="container">
+    <div class="grid">
+      {% for product in products %}
+      <div class="column-xs-12 column-md-4">
+        <figure class="img-container">
+          <img src= '{{product["file"]}}' />
+        </figure>
+        <div class="infotext">{{product["name"]}} - ${{product["price"]}} - ({{product["buyerQuantity"]}})</div>
+
+          <div class="button sell-btn">
+            <a href='/sell/{{product["id"]}}' id='{{product["id"]}}'>Sell!</a>
+          </div>
+        
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+  <script  src="../static/js/home.js"></script>
+
+</body>
+</html>

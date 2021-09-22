@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Shopify Image Repo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.12/css/all.css'>
+    <link rel="stylesheet" href="../static/css/home.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+{% if alert %}
+
+<script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+</script>
+
+<div class="alert alert-success" role="alert" style="margin: 50px 50px;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Error!</strong> {{alert}}
+</div>
+
+{% endif %}
+
+<nav>
+  <div class="container">
+    <div class="grid">
+      <div class="column-xs-12 column-md-8">
+        <p id="highlight">Shopify Image Repo</p>
+      </div>
+      <div class="column-xs-12">
+        <ul>
+          <li><a href="/dashboard/">Home</a></li>
+          <li><a href="/signout">Signout</a></li>
+          <li><a href="#"></a></li>
+          <li><a href="/profile">Hello {{username}}!</a></li>
+          <li><a href="#">${{userbalance}}</a></li>
+          <li><a href="/dashboard/addproducts">Add</a></li>
+          <li><a href="/dashboard/removeproducts" class="active">Remove</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<section class="gallery">
+  <div class="container">
+    <div class="grid">
+      {% for product in products %}
+      <div class="column-xs-12 column-md-4">
+        <figure class="img-container">
+          <img src= '{{product["file"]}}' />
+        </figure>
+        <div class="infotext">{{product["name"]}} - ${{product["price"]}} - ({{product["quantity"]}})</div>
+
+          <div class="button sell-btn" name='{{product["id"]}}'>
+            <a href='/dashboard/removeproducts/{{product["id"]}}'>Delete Product</a>
+          </div>
+        
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+  <script  src="../static/js/home.js"></script>
+
+</body>
+</html>

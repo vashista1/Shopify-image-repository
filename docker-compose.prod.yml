@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    container_name: shopify-image-repository_web
+    build: ./src
+    ports:
+      - "5000:5000"
+    links:
+      - db
+    networks: 
+      - testnetwork
+  db:
+    container_name: shopify-image-repository_db
+    build: ./db
+    networks: 
+      - testnetwork
+networks: 
+  testnetwork:
+    name: shopify-image-repo-network
+    

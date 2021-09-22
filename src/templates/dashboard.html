@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Shopify Image Repo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.12/css/all.css'>
+    <link rel="stylesheet" href="../static/css/home.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+{% if alert %}
+
+<script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+</script>
+
+<div class="alert alert-success" role="alert" style="margin: 50px 50px;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Error!</strong> {{alert}}
+</div>
+
+{% endif %}
+
+<nav>
+  <div class="container">
+    <div class="grid">
+      <div class="column-xs-12 column-md-8">
+        <p id="highlight">Shopify Image Repo</p>
+      </div>
+      <div class="column-xs-12">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="/signout" name="signout">Signout</a></li>
+          <li><a href="#"></a></li>
+          <li><a href="/profile" id="username">Hello {{username}}!</a></li>
+          <li><a href="#" id="userbalance">${{userbalance}}</a></li>
+          {% if sessionadmin %}
+          <li><a href="/dashboard/addproducts">Add</a></li>
+          <li><a href="/dashboard/removeproducts">Remove</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<section class="gallery">
+  
+  <div class="container">
+    <div class="wrap">
+      <div class="search">
+         <input type="text" class="searchTerm" id="searchInput" placeholder="What are you looking for?">
+         <button type="submit" class="searchButton" id="dashSearchButton">
+          <i class="fa fa-search"></i>
+       </button>
+      </div>
+   </div>
+   <br>
+    <div class="grid" id="mastergrid">
+      {% for product in products %}
+      <div class="column-xs-12 column-md-4" id='search{{product["id"]}}'>
+        <figure class="img-container">
+          <img src= '{{product["file"]}}' />
+        </figure>
+        <div class="infotext" id="productinfo">{{product["name"]}} - ${{product["price"]}} - ({{product["quantity"]}})</div>
+
+        <div class="button buy-btn">
+          <a href='/buy/{{product["id"]}}' id='{{product["id"]}}'>Buy!</a>
+        </div>
+        
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+  <script src="../static/js/home.js"></script>
+  <script src='../static/js/jquery.js'></script>
+  <script src="../static/js/search.js"></script>
+  
+
+</body>
+</html>
